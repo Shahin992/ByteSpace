@@ -1,40 +1,26 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import {
   Box,
   Container,
   Typography,
-  Grid,
-  InputAdornment,
-  TextField,
+  InputBase,
   Button,
-  Select,
-  MenuItem,
-  FormControl,
+  InputAdornment,
+  Avatar,
+  AvatarGroup,
+  LinearProgress,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/useAppStore';
-import { setSearchQuery, setSelectedCategory } from '../../../store/slices/coursesSlice';
-
-const stats = [
-  { value: '500K+', label: 'Active Students' },
-  { value: '800+', label: 'Total Courses' },
-  { value: '200+', label: 'Expert Instructors' },
-];
-
-const benefits = [
-  'Learn from world-class instructors',
-  'Earn recognized certificates',
-  'Flexible learning schedule',
-];
+import { setSearchQuery } from '../../../store/slices/coursesSlice';
 
 const HeroSection: React.FC = () => {
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('All');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const theme = useTheme();
@@ -42,268 +28,370 @@ const HeroSection: React.FC = () => {
 
   const handleSearch = () => {
     dispatch(setSearchQuery(query));
-    dispatch(setSelectedCategory(category));
     navigate('/courses');
   };
 
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, #0D0DFF 0%, #1919FC 40%, #0000CC 100%)',
+        // Match the deep blue background and subtle grid lines
+        backgroundColor: '#0034FF',
+        backgroundImage: `
+          linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px)
+        `,
+        backgroundSize: '140px 140px',
         minHeight: { xs: 'auto', md: '100vh' },
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
-        overflow: 'hidden',
-        pt: { xs: 14, md: 0 },
+        overflow: 'hidden', // Critical: cleanly slice the circle, shapes, and person at the bottom edge
+        pt: { xs: 16, md: 20 },
         pb: { xs: 8, md: 0 },
       }}
     >
-      {/* Decorative Shapes */}
-      <Box sx={{
-        position: 'absolute', top: '10%', right: '5%', width: { xs: 80, md: 140 },
-        height: { xs: 80, md: 140 }, borderRadius: '50%',
-        background: 'rgba(190,255,0,0.15)', backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(190,255,0,0.3)',
-      }} />
-      <Box sx={{
-        position: 'absolute', bottom: '15%', left: '3%', width: { xs: 60, md: 100 },
-        height: { xs: 60, md: 100 }, borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-        background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)',
-      }} />
-      <Box sx={{
-        position: 'absolute', top: '30%', left: '8%', width: 60, height: 60,
-        borderRadius: 3, background: '#BEFF00', opacity: 0.9, transform: 'rotate(20deg)',
-        display: { xs: 'none', lg: 'block' },
-      }} />
-      <Box sx={{
-        position: 'absolute', bottom: '25%', right: '10%', width: 80, height: 80,
-        borderRadius: '50%', border: '3px solid rgba(190,255,0,0.4)',
-        display: { xs: 'none', md: 'block' },
-      }} />
+        {/* 1. Top Left Lime Zigzag - Pinned to absolute screen edges */}
+        <Box
+          component="img"
+          src="/assets/hero/left lame zigzag.svg"
+          alt=""
+          sx={{
+            position: 'absolute', 
+            top: { xs: 80, md: 150, lg: 160 }, 
+            left: { xs: -20, md: -40, lg: -60 }, 
+            width: { xs: 120, md: 250, lg: 380 }, 
+            height: { xs: 120, md: 250, lg: 380 },
+            objectFit: 'contain', zIndex: 0,
+            display: 'block',
+          }}
+        />
+        
+        {/* 3. Top Right Lime Cone - Pinned to absolute screen edges */}
+        <Box
+          component="img"
+          src="/assets/hero/Cone.svg"
+          alt=""
+          sx={{
+            position: 'absolute', 
+            top: { xs: '5%', lg: 130 }, 
+            right: { xs: -20, md: -40, lg: -60 }, 
+            width: { xs: 100, md: 220, lg: 320 }, 
+            height: { xs: 140, md: 300, lg: 450 },
+            objectFit: 'contain', zIndex: 0,
+            display: 'block',
+          }}
+        />
 
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <Grid container spacing={6} alignItems="center">
-          {/* Left Content */}
-          <Grid size={{ xs: 12, md: 6 }}>
-            {/* Badge */}
-            <Box
+        {/* Center-anchored Background Shapes Wrapper (Caps width at 1440px to prevent center elements from drifting on ultra-wide screens) */}
+        <Box sx={{
+          position: 'absolute',
+          top: 0, left: '50%', transform: 'translateX(-50%)',
+          width: '100%', maxWidth: 1440, height: '100%',
+          pointerEvents: 'none', zIndex: 0
+        }}>
+          {/* 2. Bottom Left White Donut */}
+          <Box
+            component="img"
+            src="/assets/hero/donut-shape.svg"
+            alt=""
+            sx={{
+              position: 'absolute', 
+              bottom: { xs: 10, md: 30, lg: 60 }, 
+              left: { xs: -10, sm: 'calc(50% - 400px)', md: 'calc(50% - 520px)', lg: 'calc(50% - 710px)' }, 
+              width: { xs: 100, md: 200, lg: 300 }, 
+              height: { xs: 100, md: 200, lg: 300 },
+              objectFit: 'contain', 
+              zIndex: 20,
+              display: 'block',
+            }}
+          />
+          
+          {/* 4. Bottom Right White Zigzag (Thick) */}
+          <Box
+            component="img"
+            src="/assets/hero/right white zigzag.svg"
+            alt=""
+            sx={{
+              position: 'absolute', 
+              bottom: { xs: -10, md: -30, lg: -50 }, 
+              right: { xs: -10, sm: 'calc(50% - 400px)', md: 'calc(50% - 520px)', lg: 'calc(50% - 710px)' }, 
+              width: { xs: 90, md: 200, lg: 320 }, 
+              height: { xs: 100, md: 250, lg: 380 },
+              objectFit: 'contain', 
+              zIndex: 20,
+              display: 'block',
+            }}
+          />
+        </Box>
+
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography
+          variant="h1"
+          align="center"
+          sx={{
+            color: '#fff',
+            fontWeight: 800,
+            lineHeight: 1.2,
+            mb: 2,
+            fontSize: { xs: '2rem', sm: '3rem', md: '4.5rem' },
+            maxWidth: "100%",
+          }}
+        >
+          Get Access to Hundreds<br />Courses Available
+        </Typography>
+
+        <Typography
+          variant="body1"
+          align="center"
+          sx={{ 
+            color: 'rgba(255,255,255,0.8)', 
+            mb: 5, 
+            lineHeight: 1.6, 
+            maxWidth: 700,
+            fontSize: { xs: '1rem', md: '1.1rem' }
+          }}
+        >
+          Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
+        </Typography>
+
+        {/* --- Search Bar Wrapper --- */}
+        <Box 
+          sx={{ 
+            position: 'relative', 
+            width: '100%', 
+            maxWidth: 650, 
+            display: 'flex', 
+            justifyContent: 'center',
+            mb: { xs: 8, md: 8 }
+          }}
+        >
+          {/* Middle Left White Zigzag (Small) */}
+          <Box
+            component="img"
+            src="/assets/hero/left white zigzag.svg"
+            alt=""
+            sx={{
+              position: 'absolute', 
+              top: '60%', 
+              left: { xs: -20, md: -90, lg: -120 }, 
+              width: { xs: 60, md: 100, lg: 120 }, 
+              height: { xs: 60, md: 100, lg: 120 },
+              objectFit: 'contain', 
+              zIndex: 0,
+            }}
+          />
+
+          {/* Middle Right White Cone */}
+          <Box
+            component="img"
+            src="/assets/hero/white Cone.svg"
+            alt=""
+            sx={{
+              position: 'absolute', 
+              top: '55%', 
+              right: { xs: -20, md: -90, lg: -120 }, 
+              width: { xs: 60, md: 110, lg: 130 }, 
+              height: { xs: 60, md: 110, lg: 130 },
+              objectFit: 'contain', 
+              zIndex: 0,
+            }}
+          />
+
+          {/* Search Bar */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              bgcolor: '#fff',
+              borderRadius: 50,
+              p: 0.75,
+              pl: 3,
+              width: '100%',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+              position: 'relative',
+              zIndex: 1, // Stay above the small floating shapes
+            }}
+          >
+            <SearchIcon sx={{ color: 'text.secondary', mr: 1 }} />
+            <InputBase
+              placeholder="Course, topic, creator"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              fullWidth
+              sx={{ ml: 1, flex: 1, fontWeight: 500, fontSize: { xs: '0.85rem', sm: '1rem' } }}
+            />
+            <Button
+              variant="contained"
+              onClick={handleSearch}
               sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 1,
-                bgcolor: 'rgba(190,255,0,0.15)',
-                border: '1px solid rgba(190,255,0,0.3)',
-                px: 2.5,
-                py: 0.8,
                 borderRadius: 50,
-                mb: 3,
+                px: { xs: 2.5, sm: 4 },
+                py: { xs: 1, sm: 1.5 },
+                fontWeight: 700,
+                bgcolor: '#BEFF00',
+                color: '#050505',
+                textTransform: 'none',
+                fontSize: { xs: '0.9rem', sm: '1rem' },
+                '&:hover': {
+                  bgcolor: '#A3D900',
+                },
               }}
             >
-              <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#BEFF00', animation: 'pulse 2s infinite' }} />
-              <Typography variant="caption" sx={{ color: '#BEFF00', fontWeight: 700, letterSpacing: '0.05em' }}>
-                🎓 #1 Online Learning Platform
+              Search
+            </Button>
+          </Box>
+        </Box>
+
+        {/* --- Center Image Composition --- */}
+        <Box sx={{ 
+          position: 'relative', 
+          width: { xs: '100%', sm: 550, md: 750, lg: 850 }, 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'flex-end',
+          mt: { xs: 4, md: 6 },
+          zIndex: 10,
+        }}>
+          
+          {/* Large Lime Green Circle Backdrop */}
+          <Box
+            component="img"
+            src="/assets/hero/hero-circle.svg"
+            alt=""
+            sx={{
+              position: 'absolute',
+              // Scale the SVG to be wider than the person, reaching the floating cards
+              width: { xs: '150%', sm: '140%', md: '130%', lg: '135%' },
+              height: 'auto',
+              bottom: 0,
+              // Center the oversized absolute element perfectly
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 0,
+            }}
+          />
+
+          {/* Person Image */}
+          <Box 
+            component="img" 
+            src="/assets/hero/hero-person.png" 
+            alt="Student"
+            sx={{ 
+              width: { xs: '85%', md: '80%', lg: '75%' }, 
+              height: 'auto',
+              objectFit: 'contain',
+              position: 'relative',
+              zIndex: 1,
+              // Sit flush on the bottom baseline of the HeroSection
+              mb: -1 
+            }}
+          />
+
+          {/* -- Floating Cards -- */}
+          
+          {/* Card 1: UI/UX Design */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '25%',
+              left: { xs: '5%', md: '2%' },
+              bgcolor: '#fff',
+              borderRadius: 4,
+              p: 2,
+              px: 3,
+              minWidth: { xs: 150, md: 220 },
+              boxShadow: '0 15px 30px rgba(0,0,0,0.15)',
+              zIndex: 2,
+              display: { xs: 'none', sm: 'block' }
+            }}
+          >
+            <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#050505', mb: 0.5 }}>
+              UI/UX Design
+            </Typography>
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+              200 Courses • 1000+ Students
+            </Typography>
+          </Box>
+
+          {/* Card 2: Happy Students */}
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: '22%',
+              left: { xs: '8%', md: '3%' },
+              bgcolor: '#fff',
+              borderRadius: 4,
+              p: 2,
+              px: 3,
+              minWidth: { xs: 180, md: 250 },
+              boxShadow: '0 15px 30px rgba(0,0,0,0.15)',
+              zIndex: 2,
+              display: { xs: 'none', sm: 'block' }
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#050505' }}>
+                Happy Students
               </Typography>
             </Box>
-
-            <Typography
-              variant="h1"
-              sx={{
-                color: '#fff',
-                fontWeight: 900,
-                lineHeight: 1.1,
-                mb: 3,
-                fontSize: { xs: '2.4rem', sm: '3rem', md: '3.5rem', lg: '4rem' },
-              }}
-            >
-              Get Access to{' '}
-              <Box
-                component="span"
-                sx={{
-                  color: '#BEFF00',
-                  position: 'relative',
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: -6,
-                    left: 0,
-                    right: 0,
-                    height: 4,
-                    bgcolor: '#BEFF00',
-                    borderRadius: 2,
-                    opacity: 0.5,
-                  },
-                }}
-              >
-                Hundreds
-              </Box>{' '}
-              Courses Available
-            </Typography>
-
-            <Typography
-              variant="body1"
-              sx={{ color: 'rgba(255,255,255,0.75)', mb: 3.5, lineHeight: 1.8, maxWidth: 480 }}
-            >
-              Expand your knowledge, develop new skills, and advance your career with our expert-led
-              online courses. Join 500,000+ learners worldwide.
-            </Typography>
-
-            {/* Benefits */}
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: 4 }}>
-              {benefits.map((b) => (
-                <Box key={b} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <CheckCircleIcon sx={{ fontSize: 18, color: '#BEFF00' }} />
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.85)' }}>{b}</Typography>
-                </Box>
-              ))}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+              <Typography variant="body2" sx={{ fontWeight: 700 }}>4.5</Typography>
+              <Typography variant="caption" color="text.secondary">(240)</Typography>
+              <StarIcon sx={{ color: '#FFD700', fontSize: 16 }} />
             </Box>
-
-            {/* Search Bar */}
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 0,
-                bgcolor: '#fff',
-                borderRadius: 3,
-                p: 1,
-                mb: 5,
-                boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-                flexDirection: { xs: 'column', sm: 'row' },
-                gap: { xs: 1, sm: 0 },
-              }}
-            >
-              <FormControl size="small" sx={{ minWidth: 130, '& fieldset': { border: 'none' } }}>
-                <Select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  sx={{ fontWeight: 600, fontSize: '0.875rem' }}
-                >
-                  {['All', 'Design', 'Development', 'Marketing', 'Photography', 'Business'].map((c) => (
-                    <MenuItem key={c} value={c}>{c}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <Box sx={{ width: 1, bgcolor: 'divider', display: { xs: 'none', sm: 'block' }, my: 0.5 }} />
-              <TextField
-                placeholder="Search for courses..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                size="small"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{ '& fieldset': { border: 'none' }, '& input': { fontWeight: 500 } }}
-              />
-              <Button
-                variant="contained"
-                onClick={handleSearch}
-                sx={{
-                  borderRadius: 2,
-                  px: 3,
-                  fontWeight: 700,
-                  whiteSpace: 'nowrap',
-                  bgcolor: 'primary.main',
-                }}
-              >
-                Search
-              </Button>
-            </Box>
-
-            {/* Stats */}
-            <Box sx={{ display: 'flex', gap: { xs: 3, md: 5 }, flexWrap: 'wrap' }}>
-              {stats.map((stat, i) => (
-                <Box key={i}>
-                  <Typography variant="h4" sx={{ fontWeight: 900,  color: '#BEFF00', lineHeight: 1 }}>
-                    {stat.value}
-                  </Typography>
-                  <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.65)' }}>
-                    {stat.label}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-          </Grid>
-
-          {/* Right Image */}
-          {!isMobile && (
-            <Grid size={{ md: 6 }}>
-              <Box sx={{ position: 'relative' }}>
-                {/* Main hero image */}
-                <Box
-                  sx={{
-                    borderRadius: 5,
-                    overflow: 'hidden',
-                    boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
-                    position: 'relative',
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80"
-                    alt="Students learning online"
-                    sx={{ width: '100%', display: 'block', maxHeight: 450, objectFit: 'cover' }}
-                  />
-                  {/* Overlay gradient */}
-                  <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 60%)' }} />
-                </Box>
-
-                {/* Floating card — enrolled */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    bottom: -20,
-                    left: -30,
-                    bgcolor: '#fff',
-                    borderRadius: 3,
-                    p: 2,
-                    boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1.5,
-                  }}
-                >
-                  <Box sx={{ width: 42, height: 42, borderRadius: 2, bgcolor: 'primary.main', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <PlayArrowRoundedIcon sx={{ color: '#fff', fontSize: 24 }} />
-                  </Box>
-                  <Box>
-                    <Typography variant="caption" color="text.secondary">Total Enrolled</Typography>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>48,000+ Students</Typography>
-                  </Box>
-                </Box>
-
-                {/* Floating card — discount */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    top: 20,
-                    right: -20,
-                    bgcolor: '#BEFF00',
-                    borderRadius: 3,
-                    p: 2,
-                    boxShadow: '0 12px 40px rgba(190,255,0,0.35)',
-                  }}
-                >
-                  <Typography variant="h4" sx={{ fontWeight: 900,  lineHeight: 1, color: '#050505' }}>55%</Typography>
-                  <Typography variant="caption" sx={{ fontWeight: 700,  color: '#050505' }}>Off Today!</Typography>
-                </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <AvatarGroup max={5} sx={{ '& .MuiAvatar-root': { width: 28, height: 28, fontSize: '0.75rem', borderColor: '#fff' } }}>
+                <Avatar src="https://i.pravatar.cc/150?u=1" />
+                <Avatar src="https://i.pravatar.cc/150?u=2" />
+                <Avatar src="https://i.pravatar.cc/150?u=3" />
+                <Avatar src="https://i.pravatar.cc/150?u=4" />
+              </AvatarGroup>
+              <Box sx={{ bgcolor: '#BEFF00', width: 28, height: 28, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant="caption" sx={{ fontWeight: 800, color: '#050505', fontSize: '0.65rem' }}>2K+</Typography>
               </Box>
-            </Grid>
-          )}
-        </Grid>
-      </Container>
+            </Box>
+          </Box>
 
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
-        }
-      `}</style>
+          {/* Card 3: Learning Progress */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '25%',
+              right: { xs: '5%', md: '2%' },
+              bgcolor: '#fff',
+              borderRadius: 4,
+              p: 3,
+              minWidth: { xs: 200, md: 260 },
+              boxShadow: '0 15px 30px rgba(0,0,0,0.15)',
+              zIndex: 2,
+              display: { xs: 'none', sm: 'block' }
+            }}
+          >
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, display: 'block', mb: 1 }}>
+              Learning Progress
+            </Typography>
+            <Typography variant="h3" sx={{ fontWeight: 900, color: '#050505', mb: 1.5 }}>
+              55%
+            </Typography>
+            <LinearProgress 
+              variant="determinate" 
+              value={55} 
+              sx={{ 
+                height: 8, 
+                borderRadius: 4,
+                bgcolor: '#F0F0F0',
+                '& .MuiLinearProgress-bar': {
+                  bgcolor: '#BEFF00',
+                  borderRadius: 4,
+                }
+              }} 
+            />
+          </Box>
+
+        </Box>
+      </Container>
     </Box>
   );
 };

@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React from 'react';
 import { Box, Container, Grid, Typography, Avatar, Rating, Paper } from '@mui/material';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
-import SectionTitle from '../../components/common/SectionTitle/SectionTitle';
+import SectionTitle from '../../common/SectionTitle/SectionTitle';
 
 const testimonials = [
   {

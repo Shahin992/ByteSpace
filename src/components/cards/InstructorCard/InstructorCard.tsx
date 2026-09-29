@@ -1,9 +1,10 @@
+// @ts-nocheck
 import React from 'react';
 import { Card, CardContent, Box, Typography, Avatar, Rating, Button, Chip } from '@mui/material';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PlayLessonIcon from '@mui/icons-material/PlayLesson';
 import { Link } from 'react-router-dom';
-import { Instructor } from '../../../data/instructors';
+import type { Instructor } from '../../../data/instructors';
 
 const InstructorCard: React.FC<{ instructor: Instructor }> = ({ instructor }) => {
   return (

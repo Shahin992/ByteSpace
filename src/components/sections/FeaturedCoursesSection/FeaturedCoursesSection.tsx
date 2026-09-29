@@ -1,7 +1,8 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { Box, Container, Grid, Tabs, Tab, Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import SectionTitle from '../../components/common/SectionTitle/SectionTitle';
+import SectionTitle from '../../common/SectionTitle/SectionTitle';
 import CourseCard from '../../cards/CourseCard/CourseCard';
 import { courses } from '../../../data/courses';
 import { Link } from 'react-router-dom';

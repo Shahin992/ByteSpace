@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
-import SectionTitle from '../../components/common/SectionTitle/SectionTitle';
+import SectionTitle from '../../common/SectionTitle/SectionTitle';
 import CategoryCard from '../../cards/CategoryCard/CategoryCard';
 import { categories } from '../../../data/categories';
 

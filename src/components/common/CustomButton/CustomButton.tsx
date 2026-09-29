@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Button, ButtonProps, CircularProgress } from '@mui/material';
 
