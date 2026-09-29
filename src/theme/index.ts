@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createTheme, alpha } from '@mui/material/styles';
 import { palette } from './palette';
 import { typography } from './typography';

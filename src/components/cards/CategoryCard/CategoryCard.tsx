@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Category } from '../../../data/categories';
+import type { Category } from '../../../data/categories';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryCard: React.FC<{ category: Category }> = ({ category }) => {

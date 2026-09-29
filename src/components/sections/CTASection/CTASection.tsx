@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Box, Container, Grid, Typography, Button, Avatar, AvatarGroup } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';

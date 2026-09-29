@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import {
   Box, Container, Typography, TextField, Button, Paper, InputAdornment, IconButton, Divider

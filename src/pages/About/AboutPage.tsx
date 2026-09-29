@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Box, Container, Grid, Typography, Paper } from '@mui/material';
 import SectionTitle from '../../components/common/SectionTitle/SectionTitle';

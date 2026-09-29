@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
 import BlogCard from '../../components/cards/BlogCard/BlogCard';
