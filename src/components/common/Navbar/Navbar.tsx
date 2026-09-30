@@ -68,35 +68,17 @@ const Navbar: React.FC = () => {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 1,
               textDecoration: 'none',
               flexGrow: { xs: 1, md: 0 },
               mr: { md: 5 },
             }}
           >
-            <Box
-              sx={{
-                width: 36,
-                height: 36,
-                bgcolor: 'primary.main',
-                borderRadius: 2,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <SchoolIcon sx={{ color: '#fff', fontSize: 20 }} />
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 800,
-                color: trigger ? 'text.primary' : '#fff',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              Byte<span style={{ color: '#BEFF00' }}>Space</span>
-            </Typography>
+            <Box 
+              component="img" 
+              src={trigger ? "/assets/branding/footer-logo.svg" : "/assets/branding/header-logo.svg"} 
+              sx={{ height: 32, objectFit: 'contain', transition: 'all 0.3s ease' }} 
+              alt="ByteSpace" 
+            />
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
@@ -221,9 +203,12 @@ const Navbar: React.FC = () => {
         PaperProps={{ sx: { width: 300, pt: 2 } }}
       >
         <Box sx={{ px: 3, pb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6" sx={{ fontWeight: 800 }} color="primary.main">
-            ByteSpace
-          </Typography>
+          <Box 
+            component="img" 
+            src="/assets/branding/footer-logo.svg" 
+            sx={{ height: 28, objectFit: 'contain' }} 
+            alt="ByteSpace" 
+          />
           <IconButton onClick={() => setDrawerOpen(false)}>
             <CloseIcon />
           </IconButton>
