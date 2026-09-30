@@ -1,22 +1,22 @@
 import React from 'react';
 import HeroSection from '../../components/sections/HeroSection/HeroSection';
-import CategoriesSection from '../../components/sections/CategoriesSection/CategoriesSection';
-import FeaturedCoursesSection from '../../components/sections/FeaturedCoursesSection/FeaturedCoursesSection';
-import StatsSection from '../../components/sections/StatsSection/StatsSection';
-import TestimonialsSection from '../../components/sections/TestimonialsSection/TestimonialsSection';
-import CTASection from '../../components/sections/CTASection/CTASection';
-import NewsletterSection from '../../components/sections/NewsletterSection/NewsletterSection';
+import BrandingSection from '../../components/sections/BrandingSection/BrandingSection';
+import DiscoverSection from '../../components/sections/DiscoverSection/DiscoverSection';
+import { GrowthSection } from '../../components/sections/GrowthSection/GrowthSection';
+import { CtaSection } from '../../components/sections/CtaSection/CtaSection';
+import { TestimonialsSection } from '../../components/sections/TestimonialsSection/TestimonialsSection';
+import { Footer } from '../../components/sections/Footer/Footer';
 
 const HomePage: React.FC = () => {
   return (
     <>
       <HeroSection />
-      <CategoriesSection />
-      <FeaturedCoursesSection />
-      <StatsSection />
+      <BrandingSection />
+      <DiscoverSection />
+      <GrowthSection />
+      <CtaSection />
       <TestimonialsSection />
-      <CTASection />
-      <NewsletterSection />
+      <Footer />
     </>
   );
 };
