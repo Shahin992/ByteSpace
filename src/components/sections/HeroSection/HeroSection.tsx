@@ -371,6 +371,18 @@ const HeroSection: React.FC = () => {
               display: { xs: 'none', sm: 'block' }
             }}
           >
+            <Box
+              component="img"
+              src="/assets/hero/green-zigzag.svg"
+              alt=""
+              sx={{
+                position: 'absolute',
+                top: '6%',
+                right: '-8%',
+                width: '28%',
+                zIndex: 7,
+              }}
+            />
             <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, display: 'block', mb: 1 }}>
               Learning Progress
             </Typography>
