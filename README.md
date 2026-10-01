@@ -21,11 +21,9 @@ Before you begin, ensure you have the following installed on your machine:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/bytespace.git
-cd bytespace
+git clone https://github.com/Shahin992/ByteSpace.git
+cd ByteSpace
 ```
-
-*(Note: If the frontend is in a specific subdirectory, run `cd frontend` instead)*
 
 ### 2. Install dependencies
 
@@ -58,7 +56,8 @@ This will generate a `dist` folder containing the optimized assets ready to be d
 ## Git Branches
 
 - `main` - Production-ready code
-- `feature/landing` - Landing page implementation (current active branch)
+- `feature/landing` - Landing page implementation
+- `feature/auth-page` - Auth pages implementation (login/signup)
 
 ## License
 
