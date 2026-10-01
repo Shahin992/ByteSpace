@@ -41,14 +41,14 @@ const HeroSection: React.FC = () => {
           linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px)
         `,
         backgroundSize: '140px 140px',
-        minHeight: { xs: 'auto', md: '100vh' },
+        minHeight: { xs: '100vh', md: '100vh' },
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden', // Critical: cleanly slice the circle, shapes, and person at the bottom edge
         pt: { xs: 16, md: 20 },
-        pb: { xs: 8, md: 0 },
+        pb: 0,
       }}
     >
         {/* 1. Top Left Lime Zigzag - Pinned to absolute screen edges */}
@@ -125,7 +125,7 @@ const HeroSection: React.FC = () => {
           />
         </Box>
 
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
         <Typography
           variant="h1"
           align="center"
@@ -251,7 +251,7 @@ const HeroSection: React.FC = () => {
           display: 'flex', 
           justifyContent: 'center', 
           alignItems: 'flex-end',
-          mt: { xs: 4, md: 6 },
+          mt: 'auto',
           zIndex: 10,
         }}>
           
