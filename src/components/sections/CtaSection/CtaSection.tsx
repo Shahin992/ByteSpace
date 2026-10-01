@@ -10,11 +10,13 @@ export const CtaSection: React.FC = () => {
       overflow: 'hidden',
       // Grid Pattern
       backgroundImage: `
-        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+        linear-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 2px, transparent 2px)
       `,
       backgroundSize: '100px 100px',
-      backgroundPosition: 'center center'
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'repeat',
+      width: '100%'
     }}>
       
       {/* Decorative SVG Assets */}
@@ -55,7 +57,7 @@ export const CtaSection: React.FC = () => {
       <Box 
         component="img" 
         src="/assets/cta/cta-right-title-lame-cone.svg" 
-        sx={{ position: 'absolute', top: '4%', right: '16%', width: { xs: 120, md: 200 }, zIndex: 1 }} 
+        sx={{ position: 'absolute', top: '-2%', right: '14%', width: { xs: 120, md: 200 }, zIndex: 1 }} 
         alt=""
       />
       
@@ -63,7 +65,7 @@ export const CtaSection: React.FC = () => {
       <Box 
         component="img" 
         src="/assets/cta/right-middle-white-cone.svg" 
-        sx={{ position: 'absolute', top: '-3%', right: '0%', width: { xs: 200, md: 320 }, zIndex: 1 }} 
+        sx={{ position: 'absolute', top: '-3%', right: '0%', width: { xs: 200, md: 270 }, zIndex: 1 }} 
         alt=""
       />
       
