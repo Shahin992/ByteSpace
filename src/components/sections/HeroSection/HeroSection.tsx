@@ -37,10 +37,12 @@ const HeroSection: React.FC = () => {
         // Match the deep blue background and subtle grid lines
         backgroundColor: '#0034FF',
         backgroundImage: `
-          linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px)
+          linear-gradient(rgba(255, 255, 255, 0.25) 2px, transparent 2px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.25) 2px, transparent 2px)
         `,
         backgroundSize: '140px 140px',
+        backgroundRepeat: 'repeat',
+        width: '100%',
         minHeight: { xs: '100vh', md: '100vh' },
         display: 'flex',
         flexDirection: 'column',

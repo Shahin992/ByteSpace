@@ -28,8 +28,8 @@ import { logout } from '../../../store/slices/authSlice';
 
 const navLinks = [
   { label: 'Home', path: '/' },
-  { label: 'Courses', path: '/courses' },
-  { label: 'Creators', path: '/instructors' },
+  { label: 'Courses', path: '' },
+  { label: 'Creators', path: '' },
 ];
 
 const Navbar: React.FC = () => {
@@ -96,12 +96,12 @@ const Navbar: React.FC = () => {
             >
               {navLinks.map((link) => (
                 <Button
-                  key={link.path}
-                  component={Link}
-                  to={link.path}
+                  key={link.label}
+                  {...(link.path ? { component: Link, to: link.path } : {})}
                   sx={{
                     color: trigger ? 'text.primary' : 'rgba(255,255,255,0.9)',
-                    fontWeight: location.pathname === link.path ? 700 : 500,
+                    fontWeight: link.path && location.pathname === link.path ? 700 : 500,
+                    cursor: link.path ? 'pointer' : 'default',
                     fontSize: '0.9rem',
                     textTransform: 'none',
                     px: 1.5,
@@ -112,13 +112,13 @@ const Navbar: React.FC = () => {
                       bottom: 4,
                       left: '50%',
                       transform: 'translateX(-50%)',
-                      width: location.pathname === link.path ? '70%' : 0,
+                      width: link.path && location.pathname === link.path ? '70%' : 0,
                       height: 2,
                       bgcolor: '#BEFF00',
                       borderRadius: 1,
                       transition: 'width 0.3s ease',
                     },
-                    '&:hover::after': { width: '70%' },
+                    '&:hover::after': { width: link.path ? '70%' : 0 },
                   }}
                 >
                   {link.label}
@@ -216,13 +216,12 @@ const Navbar: React.FC = () => {
         <Divider />
         <List>
           {navLinks.map((link) => (
-            <ListItem key={link.path} disablePadding>
+            <ListItem key={link.label} disablePadding>
               <ListItemButton
-                component={Link}
-                to={link.path}
-                onClick={() => setDrawerOpen(false)}
-                selected={location.pathname === link.path}
-                sx={{ borderRadius: 2, mx: 1, my: 0.3 }}
+                {...(link.path ? { component: Link, to: link.path } : {})}
+                onClick={() => link.path && setDrawerOpen(false)}
+                selected={link.path && location.pathname === link.path}
+                sx={{ borderRadius: 2, mx: 1, my: 0.3, cursor: link.path ? 'pointer' : 'default' }}
               >
                 <ListItemText
                   primary={link.label}
